@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -8,20 +7,11 @@ const app = express();
 
 // CORS設定
 app.use(cors({
-  origin: "https://stunning-doodle-9r9wrppp474hx77g-3000.app.github.dev", // 許可するオリジン
-  methods: ["GET", "POST", "OPTIONS"], // 許可するHTTPメソッド
-  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"], // 許可するヘッダー
+  origin: "https://multimodal-live-api-web-console-wheat.vercel.app", // 許可するオリジン
+  methods: ["GET", "POST", "OPTIONS"], 
+  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"], 
 }));
 
-// プリフライトリクエスト処理
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://stunning-doodle-9r9wrppp474hx77g-3000.app.github.dev");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key");
-  res.sendStatus(200);
-});
-
-// JSONリクエストのパース
 app.use(express.json());
 
 // `/api/get-recipe`エンドポイント
@@ -39,7 +29,7 @@ app.post("/api/get-recipe", async (req, res) => {
         method: "POST",
         headers: {
           accept: "application/json",
-          "x-api-key": "A9kLm4jN1PzW8X5qR2dM7uGp0yVcKt3ZBxHwEsQfYiOb6JvL4CnXr9TqP6U2Ss9N", // 環境変数からAPIキーを取得
+          "x-api-key": process.env.API_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ query: dish_name }),
@@ -62,17 +52,12 @@ app.post("/api/get-recipe", async (req, res) => {
 app.post("/api/post-reception", async (req, res) => {
   const { name, number } = req.body;
 
-  // 入力チェック
   if (!name || number == null) {
     return res.status(400).json({ error: "name と number は必須です" });
   }
 
   try {
-    // ここでデータベースへの登録処理を実施する（プレースホルダー）
-    // 例: await db.insertReservation({ name, number });
     console.log(`Received reservation: 名前=${name}, 人数=${number}`);
-
-    // 登録処理は省略し、受け取ったデータをそのままレスポンスで返す
     res.status(200).json({ name, number });
   } catch (error) {
     console.error("Error during reservation processing:", error);
@@ -80,8 +65,5 @@ app.post("/api/post-reception", async (req, res) => {
   }
 });
 
-// サーバー起動
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// `Vercel` のサーバーレス関数としてエクスポート
+module.exports = app;
