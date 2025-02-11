@@ -1,35 +1,33 @@
 /**
  * Copyright 2024 Google LLC
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Apacheライセンスバージョン2.0（以下「ライセンス」）に基づいてライセンスされています。
+ * ライセンスに準拠する場合を除き、本ソフトウェアを使用することはできません。
+ * ライセンスのコピーは以下から取得できます。
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 適用法で要求されている場合、あるいは書面で合意されている場合を除き、
+ * 本ソフトウェアは現状のまま配布され、明示的または黙示的な保証または条件は一切提供されません。
+ * ライセンスに基づいて許諾される権利と制限事項については、ライセンスを参照してください。
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'; // index.cssを読み込み
+import App from './App'; // Appコンポーネントを読み込み
+import reportWebVitals from './reportWebVitals'; // パフォーマンス計測用の関数を読み込み
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement // 'root'というIDを持つHTML要素を取得し、レンダリングのルートとして設定
 );
 root.render(
-  <React.StrictMode>
-    <App />
+  <React.StrictMode> {/* StrictModeでラップすることで、開発中に追加のチェックと警告が有効になる */}
+    <App /> {/* Appコンポーネントをレンダリング */}
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// アプリケーションのパフォーマンス計測を開始する場合は、結果をログに記録する関数（例: reportWebVitals(console.log)）を渡すか、
+// 分析エンドポイントに送信します。詳細: https://bit.ly/CRA-vitals
+reportWebVitals(); // パフォーマンス計測を実行 (コメントアウトされているため、現在は実行されない)
+

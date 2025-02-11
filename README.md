@@ -1,28 +1,30 @@
-# Multimodal Live API - Web console
+# マルチモーダルライブ API - Webコンソール
 
-This repository contains a react-based starter app for using the [Multimodal Live API](<[https://ai.google.dev/gemini-api](https://ai.google.dev/api/multimodal-live)>) over a websocket. It provides modules for streaming audio playback, recording user media such as from a microphone, webcam or screen capture as well as a unified log view to aid in development of your application.
+このリポジトリは、WebSocket経由で[Multimodal Live API](<[https://ai.google.dev/gemini-api](https://ai.google.dev/api/multimodal-live)>) を使用するReactベースのスターターアプリです。ストリーミングオーディオ再生、マイク・ウェブカメラ・画面キャプチャなどのユーザーメディア録画、および開発を支援する統合ログビューのモジュールを提供します。
 
 [![Multimodal Live API Demo](readme/thumbnail.png)](https://www.youtube.com/watch?v=J_q7JY1XxFE)
 
 Watch the demo of the Multimodal Live API [here](https://www.youtube.com/watch?v=J_q7JY1XxFE).
 
-## Usage
+## 利用方法
 
-To get started, [create a free Gemini API key](https://aistudio.google.com/apikey) and add it to the `.env` file. Then:
+使用を開始するには、まず無料の [Gemini API キー](https://aistudio.google.com/apikey) を作成し、.env ファイルに追加します。その後、以下のコマンドを実行します。
+
 
 ```
 $ npm install && npm start
 ```
 
-We have provided several example applications on other branches of this repository:
+このリポジトリの他のブランチには、いくつかのサンプルアプリケーションを用意しています。
 
 - [demos/GenExplainer](https://github.com/google-gemini/multimodal-live-api-web-console/tree/demos/genexplainer)
 - [demos/GenWeather](https://github.com/google-gemini/multimodal-live-api-web-console/tree/demos/genweather)
 - [demos/GenList](https://github.com/google-gemini/multimodal-live-api-web-console/tree/demos/genlist)
 
-## Example
+## 例
 
-Below is an example of an entire application that will use Google Search grounding and then render graphs using [vega-embed](https://github.com/vega/vega-embed):
+以下は、Google検索のgroundingを使用し、[vega-embed](https://github.com/vega/vega-embed)を使ってグラフをレンダリングするアプリケーション全体の例です。
+
 
 ```typescript
 import { type FunctionDeclaration, SchemaType } from "@google/generative-ai";
@@ -92,26 +94,28 @@ export function Altair() {
 }
 ```
 
-## development
+## 開発について
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Project consists of:
+このプロジェクトは[Create React App](https://github.com/facebook/create-react-app)でブートストラップされています。 プロジェクトは以下で構成されています。
 
-- an Event-emitting websocket-client to ease communication between the websocket and the front-end
-- communication layer for processing audio in and out
-- a boilerplate view for starting to build your apps and view logs
 
-## Available Scripts
+- WebSocketとフロントエンド間の通信を容易にするイベントエミッターWebSocketクライアント
+- 音声入出力処理のための通信層
+- アプリケーションの構築とログの表示を開始するためのボイラープレートビュー
 
-In the project directory, you can run:
+## 利用可能なスクリプト
+
+プロジェクトディレクトリでは、以下のコマンドを実行できます:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+開発モードでアプリを実行します\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+編集するとページがリロードされます。 
+コンソールにlintエラーも表示されます。
+
+
 
 ### `npm run build`
 
@@ -123,4 +127,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-_This is an experiment showcasing the Multimodal Live API, not an official Google product. We’ll do our best to support and maintain this experiment but your mileage may vary. We encourage open sourcing projects as a way of learning from each other. Please respect our and other creators' rights, including copyright and trademark rights when present, when sharing these works and creating derivative work. If you want more info on Google's policy, you can find that [here](https://developers.google.com/terms/site-policies)._
+本番用のアプリを build フォルダにビルドします。 本番モードでReactを正しくバンドルし、ビルドを最適化して最高のパフォーマンスを実現します。
+
+ビルドは縮小され、ファイル名にはハッシュが含まれます。 アプリをデプロイする準備ができました。
+
+詳細については、[デプロイメント]に関するセクションを参照してください。
+
+
+これは、Multimodal Live APIを紹介する実験であり、Googleの公式製品ではありません。私たちは、この実験をサポートおよび維持するために最善を尽くしますが、結果は異なる場合があります。私たちは、お互いから学ぶ方法として、オープンソーシングプロジェクトを奨励しています。これらの作品を共有し、派生物を作成する際には、著作権や商標権などの権利を尊重してください。Googleのポリシーに関する詳細については、[こちら](https://developers.google.com/terms/site-policies)をご覧ください。

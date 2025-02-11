@@ -1,18 +1,17 @@
 /**
  * Copyright 2024 Google LLC
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Apacheライセンスバージョン2.0（以下「ライセンス」）に基づいてライセンスされています。
+ * ライセンスに準拠する場合を除き、本ソフトウェアを使用することはできません。
+ * ライセンスのコピーは以下から取得できます。
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 適用法で要求されている場合、あるいは書面で合意されている場合を除き、
+ * 本ソフトウェアは現状のまま配布され、明示的または黙示的な保証または条件は一切提供されません。
+ * ライセンスに基づいて許諾される権利と制限事項については、ライセンスを参照してください。
  */
+
 
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
@@ -24,9 +23,9 @@ import Logger, { LoggerFilterType } from "../logger/Logger";
 import "./side-panel.scss";
 
 const filterOptions = [
-  { value: "conversations", label: "Conversations" },
-  { value: "tools", label: "Tool Use" },
-  { value: "none", label: "All" },
+  { value: "conversations", label: "会話" },
+  { value: "tools", label: "ツールを使う" },
+  { value: "none", label: "すべて" },
 ];
 
 export default function SidePanel() {
@@ -75,7 +74,7 @@ export default function SidePanel() {
   return (
     <div className={`side-panel ${open ? "open" : ""}`}>
       <header className="top">
-        <h2>Console</h2>
+        <h2>太助AI</h2>
         {open ? (
           <button className="opener" onClick={() => setOpen(false)}>
             <RiSidebarFoldLine color="#b4b8bb" />
@@ -116,8 +115,8 @@ export default function SidePanel() {
         />
         <div className={cn("streaming-indicator", { connected })}>
           {connected
-            ? `🔵${open ? " Streaming" : ""}`
-            : `⏸️${open ? " Paused" : ""}`}
+            ? `🔵${open ? "ストリーミング" : ""}`
+            : `⏸️${open ? " 一時停止" : ""}`}
         </div>
       </section>
       <div className="side-panel-container" ref={loggerRef}>
@@ -145,7 +144,7 @@ export default function SidePanel() {
               hidden: textInput.length,
             })}
           >
-            Type&nbsp;something...
+            何か&nbsp;入力してください...
           </span>
 
           <button

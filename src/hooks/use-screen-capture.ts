@@ -1,72 +1,81 @@
 /**
  * Copyright 2024 Google LLC
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Apacheライセンスバージョン2.0（以下「ライセンス」）に基づいてライセンスされています。
+ * ライセンスに準拠する場合を除き、本ソフトウェアを使用することはできません。
+ * ライセンスのコピーは以下から取得できます。
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 適用法で要求されている場合、あるいは書面で合意されている場合を除き、
+ * 本ソフトウェアは現状のまま配布され、明示的または黙示的な保証または条件は一切提供されません。
+ * ライセンスに基づいて許諾される権利と制限事項については、ライセンスを参照してください。
  */
 
 import { useState, useEffect } from "react";
-import { UseMediaStreamResult } from "./use-media-stream-mux";
+import { UseMediaStreamResult } from "./use-media-stream-mux"; // メディアストリームの操作結果の型定義をインポート
 
+// 画面キャプチャを操作するためのカスタムフック
 export function useScreenCapture(): UseMediaStreamResult {
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  const [isStreaming, setIsStreaming] = useState(false);
+  const [stream, setStream] = useState<MediaStream | null>(null); // キャプチャされたメディアストリームを保持するState。初期値はnull
+  const [isStreaming, setIsStreaming] = useState(false); // ストリーミング中かどうかを示すState。初期値はfalse
 
+  // ストリームの状態変化を監視するuseEffect
   useEffect(() => {
+    // ストリームが終了したときの処理
     const handleStreamEnded = () => {
-      setIsStreaming(false);
-      setStream(null);
+      setIsStreaming(false); // ストリーミング中フラグをfalseに設定
+      setStream(null); // ストリームをnullに設定
     };
+
     if (stream) {
+      // ストリームが存在する場合、各トラックに終了イベントリスナーを追加
       stream
         .getTracks()
         .forEach((track) => track.addEventListener("ended", handleStreamEnded));
+
+      // クリーンアップ関数：コンポーネントがアンマウントされる際にリスナーを削除
       return () => {
         stream
           .getTracks()
           .forEach((track) =>
-            track.removeEventListener("ended", handleStreamEnded),
+            track.removeEventListener("ended", handleStreamEnded)
           );
       };
     }
-  }, [stream]);
+  }, [stream]); // streamが変更された場合のみ再実行
 
+  // 画面キャプチャを開始する関数
   const start = async () => {
-    // const controller = new CaptureController();
-    // controller.setFocusBehavior("no-focus-change");
+    // const controller = new CaptureController();  // 将来的な拡張のためコメントアウトされている
+    // controller.setFocusBehavior("no-focus-change"); // 将来的な拡張のためコメントアウトされている
+    // 画面キャプチャのメディアストリームを取得
     const mediaStream = await navigator.mediaDevices.getDisplayMedia({
-      video: true,
-      // controller
+      video: true, // videoトラックを取得
+      // controller // 将来的な拡張のためコメントアウトされている
     });
-    setStream(mediaStream);
-    setIsStreaming(true);
-    return mediaStream;
+    setStream(mediaStream); // 取得したストリームをstateに設定
+    setIsStreaming(true); // ストリーミング中フラグをtrueに設定
+    return mediaStream; // 取得したストリームを返す
   };
 
+  // 画面キャプチャを停止する関数
   const stop = () => {
     if (stream) {
-      stream.getTracks().forEach((track) => track.stop());
-      setStream(null);
-      setIsStreaming(false);
+      stream.getTracks().forEach((track) => track.stop()); // 各トラックを停止
+      setStream(null); // ストリームをnullに設定
+      setIsStreaming(false); // ストリーミング中フラグをfalseに設定
     }
   };
 
+  // 戻り値として返すオブジェクト
   const result: UseMediaStreamResult = {
-    type: "screen",
-    start,
-    stop,
-    isStreaming,
-    stream,
+    type: "screen", // ストリームの種類は"screen"
+    start, // キャプチャ開始関数
+    stop, // キャプチャ停止関数
+    isStreaming, // ストリーミング中かどうか
+    stream, // メディアストリーム
   };
 
-  return result;
+  return result; // 操作結果を返す
 }

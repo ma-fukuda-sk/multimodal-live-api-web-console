@@ -1,17 +1,15 @@
 /**
  * Copyright 2024 Google LLC
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Apache License, Version 2.0 ("ライセンス") に基づきライセンスされています。
+ * このファイルを使用する場合は、ライセンスに従わなければなりません。
+ * ライセンスのコピーは以下から入手できます:
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 適用される法律または書面による同意がない限り、このソフトウェアは
+ * "現状有姿"で提供され、明示的または黙示的な保証を伴いません。
+ * ライセンスに基づく権利および制限については、ライセンスを参照してください。
  */
 import { type FunctionDeclaration, SchemaType } from "@google/generative-ai";
 import { useEffect, useRef, useState, memo } from "react";
@@ -21,14 +19,14 @@ import { ToolCall } from "../../multimodal-live-types";
 
 const declaration: FunctionDeclaration = {
   name: "render_altair",
-  description: "Displays an altair graph in json format.",
+  description: "Altair グラフを JSON 形式で表示します。",
   parameters: {
     type: SchemaType.OBJECT,
     properties: {
       json_graph: {
         type: SchemaType.STRING,
         description:
-          "JSON STRING representation of the graph to render. Must be a string, not a json object",
+          "レンダリングするグラフの JSON 文字列表現。JSON オブジェクトではなく、文字列である必要があります。",
       },
     },
     required: ["json_graph"],
@@ -51,12 +49,12 @@ function AltairComponent() {
       systemInstruction: {
         parts: [
           {
-            text: 'You are my helpful assistant. Any time I ask you for a graph call the "render_altair" function I have provided you. Dont ask for additional information just make your best judgement.',
+            text: 'あなたは私の役に立つアシスタントです。グラフを作成するよう依頼された場合は、提供された "render_altair" 関数を使用してください。追加情報を求めず、最善の判断で作成してください。',
           },
         ],
       },
       tools: [
-        // there is a free-tier quota for search
+        // 無料枠のクォータがある検索ツール
         { googleSearch: {} },
         { functionDeclarations: [declaration] },
       ],
@@ -65,7 +63,7 @@ function AltairComponent() {
 
   useEffect(() => {
     const onToolCall = (toolCall: ToolCall) => {
-      console.log(`got toolcall`, toolCall);
+      console.log(`ツール呼び出しを受信`, toolCall);
       const fc = toolCall.functionCalls.find(
         (fc) => fc.name === declaration.name,
       );
@@ -73,8 +71,8 @@ function AltairComponent() {
         const str = (fc.args as any).json_graph;
         setJSONString(str);
       }
-      // send data for the response of your tool call
-      // in this case Im just saying it was successful
+      // ツール呼び出しのレスポンスデータを送信
+      // この場合、成功したことを示す
       if (toolCall.functionCalls.length) {
         setTimeout(
           () =>
