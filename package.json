@@ -19,6 +19,7 @@
     "vega": "^5.30.0",
     "vega-embed": "^6.29.0",
     "vega-lite": "^5.22.0",
+    "vercel": "^41.0.3",
     "web-vitals": "^2.1.4",
     "zustand": "^5.0.1"
   },

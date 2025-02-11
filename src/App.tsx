@@ -19,7 +19,7 @@ import SidePanel from "./components/side-panel/SidePanel"; // サイドパネル
 // import { Altair } from "./components/altair/Altair"; // Altairコンポーネントをインポート
 import ControlTray from "./components/control-tray/ControlTray"; // コントロールトレイコンポーネントをインポート
 import cn from "classnames"; // classnamesユーティリティをインポート
-import { KitchenTrainer } from "./components/kitchen-trainer/Kitchen-trainer";
+// import { KitchenTrainer } from "./components/kitchen-trainer/Kitchen-trainer";
 import { Receptionist } from "./components/receptionist/Receptionist";
 
 
