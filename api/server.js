@@ -7,7 +7,7 @@ const app = express();
 
 // CORS設定
 app.use(cors({
-  origin: "https://multimodal-live-api-web-console-wheat.vercel.app", // 許可するオリジン
+  origin: "*", // 許可するオリジン
   methods: ["GET", "POST", "OPTIONS"], 
   allowedHeaders: ["Content-Type", "Authorization", "x-api-key"], 
 }));
