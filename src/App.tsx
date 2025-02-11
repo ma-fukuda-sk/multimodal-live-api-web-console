@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <LiveAPIProvider url={uri} apiKey={API_KEY}>
         <div className="streaming-console">
-          <SidePanel />
+          {/* <SidePanel /> */}
           <main>
             {/* ナビゲーションバー */}
             <nav className="navbar">
