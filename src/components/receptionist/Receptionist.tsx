@@ -86,13 +86,14 @@ function ReceptionistComponent() {
     };
   }, [client]);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   // ユーザーが「はい、予約する」ボタンを押したときの処理
   const confirmReservation = async () => {
     if (!pendingReservation || !pendingFc) return;
     try {
       console.log("予約登録API呼び出し開始...");
       const response = await fetch(
-        "https://stunning-doodle-9r9wrppp474hx77g-5000.app.github.dev/api/post-reception",
+        `${API_BASE_URL}/api/post-reception`,  // 環境変数からURLを取得
         {
           method: "POST",
           headers: {
