@@ -47,7 +47,7 @@ function KitchenTrainerComponent() {
   useEffect(() => {
     const onToolCall = async (toolCall: ToolCall) => {
       console.log("ツール呼び出しを受信:", toolCall);
-
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const fc = toolCall.functionCalls.find((fc) => fc.name === getRecipe.name);
       if (fc) {
         const dishName = (fc.args as any).dish_name;
@@ -56,7 +56,7 @@ function KitchenTrainerComponent() {
         try {
           console.log("リクエスト送信開始...");
           const response = await fetch(
-            "https://stunning-doodle-9r9wrppp474hx77g-5000.app.github.dev/api/get-recipe",
+            `${API_BASE_URL}/api/get-recipe`,
             {
               method: "POST",
               headers: {
