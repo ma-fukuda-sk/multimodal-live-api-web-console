@@ -169,3 +169,33 @@ body {
   border-radius: 32px;
   max-height: fit-content;
 }
+/* ナビゲーションバー */
+.navbar {
+  display: flex;
+  justify-content: center;
+  background: var(--Neutral-10);
+  padding: 1rem;
+  gap: 1rem;
+  border-bottom: 2px solid var(--border-stroke);
+
+  button {
+    background: var(--Neutral-20);
+    color: var(--text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background: var(--Neutral-30);
+    }
+
+    &.active {
+      background: var(--accent-blue);
+      color: var(--Neutral-00);
+      font-weight: bold;
+    }
+  }
+}
